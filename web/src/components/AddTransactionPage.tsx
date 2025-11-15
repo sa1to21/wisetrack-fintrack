@@ -89,6 +89,15 @@ export function AddTransactionPage({ onBack, onAddTransaction }: AddTransactionP
     })} ${symbol}`;
   };
 
+  // Инициализация Telegram WebApp
+  useEffect(() => {
+    // Расширить WebApp на весь экран
+    window.Telegram?.WebApp?.expand();
+
+    // Отключить вертикальные свайпы для стабильности viewport
+    window.Telegram?.WebApp?.disableVerticalSwipes();
+  }, []);
+
   // Загрузить категории и счета из API
   useEffect(() => {
     const loadData = async () => {
@@ -403,7 +412,7 @@ export function AddTransactionPage({ onBack, onAddTransaction }: AddTransactionP
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Amount */}
-              <OptimizedMotion 
+              <OptimizedMotion
                 className="space-y-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -411,22 +420,17 @@ export function AddTransactionPage({ onBack, onAddTransaction }: AddTransactionP
               >
                 <Label htmlFor="amount" className="text-slate-700">{t('fields.amount')} *</Label>
                 <div className="relative">
-                  <OptimizedMotion
-                    whileFocus={{ scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Input
-                      id="amount"
-                      type="number"
-                      placeholder="0"
-                      value={amount}
-                      onChange={handleNumberInput(setAmount)}
-                      onWheel={(e) => e.currentTarget.blur()}
-                      className="text-2xl font-medium text-center py-6 border-blue-200 focus:border-blue-400 focus:ring-blue-400/20 bg-gradient-to-br from-white to-blue-50/30 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
-                      step="0.01"
-                      min="0"
-                    />
-                  </OptimizedMotion>
+                  <Input
+                    id="amount"
+                    type="number"
+                    placeholder="0"
+                    value={amount}
+                    onChange={handleNumberInput(setAmount)}
+                    onWheel={(e) => e.currentTarget.blur()}
+                    className="text-2xl font-medium text-center py-6 border-blue-200 focus:border-blue-400 focus:ring-blue-400/20 bg-gradient-to-br from-white to-blue-50/30 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
+                    step="0.01"
+                    min="0"
+                  />
                 </div>
               </OptimizedMotion>
 
@@ -479,62 +483,58 @@ export function AddTransactionPage({ onBack, onAddTransaction }: AddTransactionP
               </OptimizedMotion>
 
               {/* Account Selection */}
-              <OptimizedMotion 
+              <OptimizedMotion
                 className="space-y-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.5 }}
               >
                 <Label htmlFor="account" className="text-slate-700">{t('fields.account')} *</Label>
-                <OptimizedMotion whileFocus={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
-                  <Select value={account} onValueChange={setAccount}>
-                    <SelectTrigger className="border-blue-200 focus:border-blue-400 focus:ring-blue-400/20 bg-gradient-to-br from-white to-blue-50/30">
-                      <SelectValue placeholder={t('selectAccount')} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {(apiAccounts.length > 0 ? apiAccounts : accounts).map((acc) => {
-                        const Icon = 'account_type' in acc ? getAccountIconComponent(acc.account_type) : ('icon' in acc ? acc.icon : Wallet);
-                        const balance = 'balance' in acc ? parseFloat(acc.balance.toString()) : 0;
-                        const currency = 'currency' in acc ? acc.currency : 'RUB';
-                        return (
-                          <SelectItem key={acc.id} value={String(acc.id)}>
-                            <div className="flex items-center justify-between gap-4 w-full">
-                              <div className="flex items-center gap-2">
-                                <Icon className="w-4 h-4 text-blue-600" />
-                                <span>{acc.name}</span>
-                              </div>
-                              {'balance' in acc && (
-                                <span className="text-xs text-muted-foreground">
-                                  {formatCurrency(balance, currency)}
-                                </span>
-                              )}
+                <Select value={account} onValueChange={setAccount}>
+                  <SelectTrigger className="border-blue-200 focus:border-blue-400 focus:ring-blue-400/20 bg-gradient-to-br from-white to-blue-50/30">
+                    <SelectValue placeholder={t('selectAccount')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {(apiAccounts.length > 0 ? apiAccounts : accounts).map((acc) => {
+                      const Icon = 'account_type' in acc ? getAccountIconComponent(acc.account_type) : ('icon' in acc ? acc.icon : Wallet);
+                      const balance = 'balance' in acc ? parseFloat(acc.balance.toString()) : 0;
+                      const currency = 'currency' in acc ? acc.currency : 'RUB';
+                      return (
+                        <SelectItem key={acc.id} value={String(acc.id)}>
+                          <div className="flex items-center justify-between gap-4 w-full">
+                            <div className="flex items-center gap-2">
+                              <Icon className="w-4 h-4 text-blue-600" />
+                              <span>{acc.name}</span>
                             </div>
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                </OptimizedMotion>
+                            {'balance' in acc && (
+                              <span className="text-xs text-muted-foreground">
+                                {formatCurrency(balance, currency)}
+                              </span>
+                            )}
+                          </div>
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
               </OptimizedMotion>
 
               {/* Description */}
-              <OptimizedMotion 
+              <OptimizedMotion
                 className="space-y-2"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.55 }}
               >
                 <Label htmlFor="description" className="text-slate-700">{t('fields.description')}</Label>
-                <OptimizedMotion whileFocus={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
-                  <Textarea
-                    id="description"
-                    placeholder={t('descriptionPlaceholder')}
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    rows={3}
-                    className="border-blue-200 focus:border-blue-400 focus:ring-blue-400/20 bg-gradient-to-br from-white to-blue-50/30"
-                  />
-                </OptimizedMotion>
+                <Textarea
+                  id="description"
+                  placeholder={t('descriptionPlaceholder')}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  rows={3}
+                  className="border-blue-200 focus:border-blue-400 focus:ring-blue-400/20 bg-gradient-to-br from-white to-blue-50/30"
+                />
               </OptimizedMotion>
 
               {/* Submit Button */}
