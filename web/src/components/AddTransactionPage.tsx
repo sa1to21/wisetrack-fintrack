@@ -94,32 +94,8 @@ export function AddTransactionPage({ onBack, onAddTransaction }: AddTransactionP
     // Расширить WebApp на весь экран
     window.Telegram?.WebApp?.expand();
 
-    // Отключить вертикальные свайпы для стабильности viewport
-    window.Telegram?.WebApp?.disableVerticalSwipes();
-
-    // Фиксируем viewport height через CSS переменную
-    const setViewportHeight = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-
-    // Устанавливаем начальное значение
-    setViewportHeight();
-
-    // Обновляем при изменении размера окна
-    window.addEventListener('resize', setViewportHeight);
-
-    // Слушаем события Telegram viewport
-    const handleViewportChanged = () => {
-      setViewportHeight();
-    };
-
-    window.Telegram?.WebApp?.onEvent('viewportChanged', handleViewportChanged);
-
-    return () => {
-      window.removeEventListener('resize', setViewportHeight);
-      window.Telegram?.WebApp?.offEvent('viewportChanged', handleViewportChanged);
-    };
+    // Важно: НЕ вызываем disableVerticalSwipes, чтобы Telegram мог управлять скроллом
+    // при появлении клавиатуры
   }, []);
 
   // Загрузить категории и счета из API
@@ -307,7 +283,7 @@ export function AddTransactionPage({ onBack, onAddTransaction }: AddTransactionP
   // Показываем экран загрузки
   if (loading) {
     return (
-      <div className="min-h-full flex items-center justify-center" style={{ background: 'var(--bg-page-dashboard)', minHeight: 'calc(var(--vh, 1vh) * 100)' }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg-page-dashboard)' }}>
         <div className="text-center space-y-4">
           <Loader2 className="w-12 h-12 mx-auto text-blue-600 animate-spin" />
           <p className="text-slate-600">{t('loading')}</p>
@@ -319,7 +295,7 @@ export function AddTransactionPage({ onBack, onAddTransaction }: AddTransactionP
   // Если категории не загрузились - показываем ошибку
   if (apiCategories.length === 0) {
     return (
-      <div className="min-h-full flex items-center justify-center p-4" style={{ background: 'var(--bg-page-dashboard)', minHeight: 'calc(var(--vh, 1vh) * 100)' }}>
+      <div className="min-h-screen flex items-center justify-center p-4" style={{ background: 'var(--bg-page-dashboard)' }}>
         <div className="text-center max-w-md">
           <div className="text-red-600 text-5xl mb-4">⚠️</div>
           <h2 className="text-xl font-semibold text-slate-800 mb-2">{t('errorLoadingCategories.title')}</h2>
@@ -333,7 +309,7 @@ export function AddTransactionPage({ onBack, onAddTransaction }: AddTransactionP
   }
 
   return (
-    <div className="min-h-full" style={{ background: 'var(--bg-page-dashboard)', minHeight: 'calc(var(--vh, 1vh) * 100)' }}>
+    <div className="min-h-screen pb-safe" style={{ background: 'var(--bg-page-dashboard)' }}>
       {/* Header */}
       <OptimizedMotion
         className="p-4 pb-6 relative overflow-hidden"

@@ -199,3 +199,18 @@
 html {
   font-size: var(--font-size);
 }
+
+/* Fix for Telegram Mini App viewport and keyboard */
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  position: fixed;
+  width: 100%;
+  overscroll-behavior: none;
+}
+
+#root {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
