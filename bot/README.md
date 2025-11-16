@@ -35,7 +35,7 @@ cp .env.example .env
 
 Заполните переменные:
 - `TELEGRAM_BOT_TOKEN` — токен бота от [@BotFather](https://t.me/BotFather)
-- `WEBAPP_URL` — URL развернутого фронтенда (по умолчанию: https://financetrack21.netlify.app)
+- `WEBAPP_URL` — URL развернутого фронтенда (по умолчанию: https://wisetrack21.site/)
 
 ### 3. Запуск бота
 
@@ -46,7 +46,7 @@ python bot.py
 Бот должен вывести:
 ```
 🤖 Бот FinTrack запущен!
-🌐 WebApp URL: https://financetrack21.netlify.app
+🌐 WebApp URL: https://wisetrack21.site/
 ```
 
 ## 🔧 Настройка команд в BotFather
@@ -70,7 +70,7 @@ help - Справка
 1. Отправьте [@BotFather](https://t.me/BotFather) команду `/setmenubutton`
 2. Выберите вашего бота
 3. Введите текст: `Открыть FinTrack`
-4. Введите URL: `https://financetrack21.netlify.app`
+4. Введите URL: `https://wisetrack21.site/`
 
 ## 📦 Deployment
 
