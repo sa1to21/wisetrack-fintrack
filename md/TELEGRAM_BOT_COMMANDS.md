@@ -59,7 +59,7 @@ async def cmd_start(message: types.Message):
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=[[
         types.InlineKeyboardButton(
             text="💰 Открыть WiseTrack",
-            web_app=types.WebAppInfo(url="https://financetrack21.netlify.app")
+            web_app=types.WebAppInfo(url="https://wisetrack21.site/")
         )
     ]])
     await message.answer(
@@ -469,7 +469,7 @@ donate - Поддержать проект
 
 ### 2. **Menu Button** (кнопка в поле ввода)
 - Text: "Открыть WiseTrack"
-- URL: `https://financetrack21.netlify.app`
+- URL: `https://wisetrack21.site/`
 
 ### 3. **Inline Query** (опционально)
 Возможность быстрого поиска транзакций прямо из строки ввода:
@@ -541,7 +541,7 @@ donate - Поддержать проект
 
 ## 🔗 Полезные ссылки
 
-- **Приложение:** https://financetrack21.netlify.app
+- **Приложение:** https://wisetrack21.site/
 - **API:** https://e1b06042c578.ngrok-free.app/api/v1
 - **GitHub:** (добавить ссылку)
 - **Документация:** [README.md](./README.md)

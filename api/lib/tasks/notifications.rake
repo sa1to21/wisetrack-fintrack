@@ -5,7 +5,7 @@ namespace :notifications do
     require 'json'
 
     bot_token = ENV['TELEGRAM_BOT_TOKEN']
-    webapp_url = ENV['WEBAPP_URL'] || 'https://financetrack21.netlify.app'
+    webapp_url = ENV['WEBAPP_URL'] || 'https://wisetrack21.site/'
 
     unless bot_token
       puts "ERROR: TELEGRAM_BOT_TOKEN environment variable is not set"

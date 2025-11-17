@@ -726,7 +726,7 @@ VITE_API_URL=https://b0089b101bb1.ngrok-free.app/api/v1
 ## 🚀 Deployment
 
 ### Frontend (Netlify)
-- **URL**: https://financetrack21.netlify.app
+- **URL**: https://wisetrack21.site/
 - **Auto-deploy**: При push в master
 - **Build command**: `cd web && npm run build`
 - **Publish directory**: `web/dist`

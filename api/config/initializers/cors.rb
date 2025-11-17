@@ -10,7 +10,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins "http://localhost:3000",
             "http://127.0.0.1:3000",
             "http://localhost:5173",
-            "https://financetrack21.netlify.app",
+            "https://wisetrack21.site",
             /\.ngrok\.io$/,
             /\.ngrok-free\.app$/
 
