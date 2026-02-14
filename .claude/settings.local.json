@@ -39,7 +39,9 @@
       "Bash(bin/rails generate:*)",
       "Bash(ssh:*)",
       "Bash(git checkout:*)",
-      "Bash(git branch:*)"
+      "Bash(git branch:*)",
+      "Bash(bundle exec ruby:*)",
+      "Bash(del test_categories.rb)"
     ],
     "deny": [],
     "ask": []
