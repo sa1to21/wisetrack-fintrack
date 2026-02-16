@@ -12,8 +12,6 @@ services:
     volumes:
       - api_storage:/rails/storage
       - api_logs:/rails/log
-    ports:
-      - "3000:80"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80/up"]
@@ -29,7 +27,7 @@ services:
       dockerfile: Dockerfile
     container_name: fintrack_web
     ports:
-      - "8080:80"
+      - "127.0.0.1:8080:80"
     depends_on:
       api:
         condition: service_healthy

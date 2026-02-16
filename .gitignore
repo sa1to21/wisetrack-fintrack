@@ -38,3 +38,7 @@ api/storage/*
 
 # Docker
 docker-compose.override.ymlapi/.env
+/scripts
+*.md
+*.csv
+*.txt
